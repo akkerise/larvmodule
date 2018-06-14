@@ -1,0 +1,25 @@
+{
+    "name": "nwidart/cms",
+    "description": "",
+    "authors": [
+        {
+            "name": "AkKe",
+            "email": "nguyenthanh.rise.88@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\Cms\\Providers\\CmsServiceProvider"
+            ],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Cms\\": ""
+        }
+    }
+}

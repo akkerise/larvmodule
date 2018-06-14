@@ -1,0 +1,45 @@
+<?php
+namespace App\Modules\Api\Models;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
+
+class Game extends Model
+{
+    protected $table = "h5_games as game";
+    
+    public function getList($offset, $limit, $categoryId = null){
+        $query = DB::table($this->table)
+                ->join('h5_categories as category', 'game.category_id', '=', 'category.id')
+                ->skip($offset)
+                ->take($limit);
+        if(!empty($categoryId)){
+            $query->where('game.category_id',$categoryId);
+        }
+        $data = $query->get([
+                    'game.id as game_id',
+                    'game.name',
+                    'game.logo',
+                    'game.cover',
+                    'game.thumb_share',
+                    'game.description',
+                    'game.publish_at as publishdate',
+                    'game.created_at',
+                    'game.updated_at',
+                    'game.status',
+                    'game.viewed',
+                    'game.played',
+                    'game.is_trending',
+                    'game.is_ghim',
+                    'game.tags',
+                    'category.id as category_id',
+                    'category.name as category_name',
+                    'category.slug as category_slug',
+                    'category.parent_slug as category_parent_slug',
+                    'category.description as category_description',
+                    'category.cover as category_cover',
+                    'category.icon as category_icon'
+                    ]);
+        return $data;
+    }
+
+}
